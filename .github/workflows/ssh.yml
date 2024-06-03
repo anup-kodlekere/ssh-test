@@ -29,4 +29,4 @@ jobs:
           echo "${{ secrets.SSH_KEY }}" > /home/runner/.ssh/github_actions
           chmod 0600 /home/runner/.ssh/github_actions
 
-          ssh -i /home/runner/.ssh/github_actions ubuntu@130.198.103.76 'ls'
+          ssh -vvv -i /home/runner/.ssh/github_actions ubuntu@130.198.103.76 'ls'
