@@ -24,6 +24,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Execute SSH commmands on remote server VCM
         run: |
-          chmod 0600 "${SSH_KEY}"
 
-          ssh -i "${SSH_KEY}" ubuntu@130.198.103.76 'ls'
+          mkdir -p /home/runner/.ssh/
+          echo "${{ secrets.SSH_KEY }}" > /home/runner/.ssh/github_actions
+          chmod 0600 /home/runner/.ssh/github_actions
+
+          ssh -i /home/runner/.ssh/github_actions ubuntu@130.198.103.76 'ls'
