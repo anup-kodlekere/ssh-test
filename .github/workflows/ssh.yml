@@ -1,0 +1,29 @@
+name: Periodic Functional Tests
+
+on: [ push, workflow_dispatch ]
+
+jobs:
+  run_tests_auto:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Execute SSH commmands on remote server VCM
+        uses: JimCronqvist/action-ssh@master
+        with:
+          username: 'root'
+          hosts: 130.198.103.76
+          privateKey: ${{ secrets.SSH_KEY }}
+          port: 22
+          command: ls
+
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Execute SSH commmands on remote server VCM
+        run: |
+          chmod 0600 "${SSH-KEY}"
+
+          ssh -i "${SSH-KEY}" ubuntu@130.198.103.76 'ls'
